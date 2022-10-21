@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(...arg) {
+        console.log(arg);
+      }
+
+      foo`hahha is ${123} dog ${222}
+      .banner {
+        color：red;
+      }
+      `;
+      // [
+      //   [
+      //     "hahha is ",
+      //     " dog ",
+      //     "\n      .banner {\n        color：red;\n      }\n      ",
+      //   ],
+      //   123,
+      //   222,
+      // ];
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const p = new Promise((resolve, reject) => {
+        resolve("p的resolve");
+      });
+      const promise = new Promise((resolve, reject) => {
+        // 1. resolve() 普通的值
+        // resolve(123);
+
+        // 2. resolve() 一个promise， 这个新的promise会决定原promise的状态
+        resolve(p);
+
+        // 3. resolve() 一个带有then方法的对象
+        // resolve({
+        //   name: "22",
+        //   then(resolve, reject) {
+        //     // resolve("hhh");
+        //     reject("ss");
+        //   },
+        // });
+      });
+
+      promise
+        .then((val) => console.log(`结果：${val}`))
+        .catch((err) => console.error(err));
+    </script>
+  </body>
+</html>

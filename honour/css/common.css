@@ -1,0 +1,40 @@
+.wrapper_980 {
+  width: 980px;
+  margin: 0 auto;
+}
+.wrapper_1200 {
+  width: 1200px;
+  margin: 0 auto;
+}
+.wrapper_1300 {
+  width: 1300px;
+  margin: 0 auto;
+}
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.hot::before,.proclamation::before {
+  /* content: "活动"; */
+  display: inline-block;
+  width: 32px;
+  font-size: 12px;
+  font-style: normal;
+  text-align: center;
+  margin-top: -1px;
+  vertical-align: middle;
+  line-height: 16px;
+  border: 1px solid #f00;
+  border-radius: 2px;
+}
+.hot::before {
+  content: '活动';
+  color: #ff3636;
+  border-color: #ff3636;
+}
+.proclamation::before {
+  content: '公告';
+  color: #f4be19;
+  border-color: #f4be19;
+}

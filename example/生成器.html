@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // next函数传参 第一次执行next无法接收到，一般直接传在函数中
+      function* foo(res) {
+        console.log("111", res);
+        console.log("111", res);
+        const res1 = yield "萘萘萘";
+        // return "萘萘萘";
+        console.log("222", res1);
+        console.log("222", res1);
+        const res2 = yield "哈哈哈";
+        console.log("333", res2);
+        console.log("333", res2);
+      }
+
+      const gererator = foo("第一个");
+      console.log(gererator.next());
+      console.log(gererator.next("第二个"));
+      console.log(gererator.next("第三个"));
+
+      // 执行结果如下
+      // {value: '萘萘萘', done: false} 这种是next函数的返回值
+      // 如果遇到return后续代码不会执行，next的返回值是 {value: '萘萘萘', done: true}
+      // 之后在执行next 返回值都是 {value: undefined, done: true}
+      /*
+        111 第一个
+        111 第一个
+        {value: '萘萘萘', done: false}
+        222 第二个
+        222 第二个
+        {value: '哈哈哈', done: false}
+        333 第三个
+        333 第三个
+         {value: undefined, done: true}
+      */
+    </script>
+  </body>
+</html>

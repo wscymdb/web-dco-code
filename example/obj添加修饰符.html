@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        name: "zs",
+        age: 19,
+      };
+
+      let keys = Object.keys(obj);
+      for (const key of keys) {
+        let value = obj[key];
+        Object.defineProperty(obj, key, {
+          set(newVal) {
+            console.log(key, "被设置了新值", newVal);
+            value = newVal;
+          },
+          get() {
+            console.log(`${key}被外界访问`);
+            return value;
+          },
+        });
+      }
+
+      obj.name = "zss";
+      obj.age;
+    </script>
+  </body>
+</html>

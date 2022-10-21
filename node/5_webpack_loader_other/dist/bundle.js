@@ -1,0 +1,1 @@
+(()=>{"use strict";var o;o=2994..length,console.log(new Date),console.log(2994,o),console.log((function(){return 123}))})();

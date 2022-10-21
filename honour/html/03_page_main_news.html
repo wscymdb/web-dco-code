@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>王者荣耀-main-news</title>
+    <link rel="stylesheet" href="./../css/common.css" />
+    <link rel="stylesheet" href="./../css/reset.css" />
+    <style>
+      .main {
+      }
+      .main .new-section {
+        display: flex;
+
+        height: 342px;
+      }
+      .main .new-section .banner {
+        position: relative;
+        width: 604px;
+        height: 342px;
+        background-color: #f00;
+      }
+      .main .new-section .banner .banner-action {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+        line-height: 44px;
+        background-color: #000;
+      }
+      .main .new-section .banner .banner-action ul {
+        display: flex;
+        height: 100%;
+      }
+      .main .new-section .banner .banner-action a {
+        display: block;
+        width: 120.8px;
+        text-align: center;
+        color: #b1b2be;
+      }
+      .main .new-section .banner .banner-action a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: #f3c258;
+      }
+      .main .new-section .news {
+        flex: 1;
+        overflow: hidden;
+        height: 342px;
+        padding: 0 17px;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .main .new-section .news .title-list ul {
+        display: flex;
+        border-bottom: 1px solid #000;
+      }
+      .main .new-section .news .title-list li {
+        box-sizing: border-box;
+        width: 52px;
+        height: 45px;
+        line-height: 48px;
+        font-size: 14px;
+        transition: all 0.2s linear;
+      }
+      .main .new-section .news .title-list li:hover {
+        border-bottom: 3px solid #f3c258;
+      }
+      .main .new-section .news .title-list li:hover a {
+        color: #f3c258;
+      }
+      .main .new-section .news .title-list li a {
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        color: #b8b9c5;
+      }
+      .main .new-section .news .notices {
+        height: 35px;
+        line-height: 35px;
+        margin: 15px 0;
+        padding: 0 150px 0 12px;
+        font-size: 18px;
+        color: #f3c258;
+        background-color: #414046;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .main .new-section .news .news-list {
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 230px;
+        padding-bottom: 20px;
+      }
+      .main .new-section .news .news-list ul {
+      }
+      .main .new-section .news .news-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        margin: 2px 0;
+      }
+      .main .new-section .news .news-list li a {
+        width: 80%;
+        font-size: 14px;
+        color: #b8b9c5;
+      }
+      .main .new-section .news .news-list li .date {
+        font-size: 14px;
+        color: #999;
+      }
+      .main .new-section .download {
+        width: 236px;
+        height: 342px;
+        background-color: #faa;
+      }
+      .main .new-section .download a {
+        display: block;
+        background: url("./../images/main_sprite.png") no-repeat;
+      }
+      .main .new-section .download .download-btn {
+        height: 128px;
+        background-position: 0 -219px;
+      }
+      .main .new-section .download .guard-btn {
+        height: 106px;
+        background-position: 0 -350px;
+      }
+      .main .new-section .download .experience-btn {
+        height: 108px;
+        background-position: 0 -461px;
+      }
+
+      /* entrance-section  */
+      .main .entrance-section {
+        margin-top: 30px;
+      }
+      .main .entrance-section ul {
+        display: flex;
+      }
+      .main .entrance-section ul li {
+        width: 291px;
+        height: 134px;
+        margin-left: 12px;
+        overflow: hidden;
+      }
+      .main .entrance-section ul li:first-child {
+        margin-left: 0;
+      }
+      .main .entrance-section ul li:hover a {
+        transform: scale(1.1);
+      }
+      .main .entrance-section ul li a {
+        display: block;
+        transition: all 0.4s ease-in;
+      }
+      /* content-section */
+      .main .content-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      .main .content-section .left-content {
+        width: 872px;
+        background-color: #f3c258;
+      }
+      .main .content-section .right-content {
+        width: 295px;
+        background-color: #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="new-section wrapper_1200">
+        <div class="banner">
+          <div class="banner-img">
+            <a href="#"
+              ><img
+                src="./../images/b6bb1f58b90596754eb211c7fb3cd3f1.jpeg"
+                alt=""
+            /></a>
+          </div>
+          <div class="banner-action">
+            <ul>
+              <li><a href="#">夏日奇幻之旅</a></li>
+              <li><a href="#">夏季赛周最佳</a></li>
+              <li><a href="#">第六届全国大赛</a></li>
+              <li><a href="#">第六届全球大赛</a></li>
+              <li><a href="#">王者夏日直播节</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="news">
+          <div class="title-list">
+            <ul>
+              <li><a href="#">热门</a></li>
+              <li><a href="#">新闻</a></li>
+              <li><a href="#">公告</a></li>
+              <li><a href="#">活动</a></li>
+              <li><a href="#">赛事</a></li>
+              <li><a href="#">...</a></li>
+            </ul>
+          </div>
+          <p class="notices">王者荣耀夏日直播节福利 王者荣耀夏日直播节福利</p>
+          <div class="news-list">
+            <ul>
+              <li>
+                <a class="ellipsis proclamation" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis proclamation" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+              <li>
+                <a class="ellipsis hot" href="#">
+                  86版《西游记》皮肤唐三藏上线！还有全新活动专属皮肤、秒杀皮肤等福利上线！</a
+                >
+                <span class="date">10/24</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="download">
+          <a href="#" class="download-btn"></a>
+          <a href="#" class="guard-btn"></a>
+          <a href="#" class="experience-btn"></a>
+        </div>
+      </div>
+      <div class="entrance-section wrapper_1200">
+        <ul>
+          <li>
+            <a href="#">
+              <img src="./../images/entrance1.jpg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./../images/entrance2.png" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./../images/entrance3.jpg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="./../images/entrance4.jpg" alt="" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="content-section wrapper_1200">
+        <div class="left-content">1</div>
+        <div class="right-content">2</div>
+      </div>
+    </div>
+  </body>
+</html>

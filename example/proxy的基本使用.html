@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "zs",
+        age: 19,
+      };
+
+      // target表示被代理的源对象
+      // key 被查看、操作的对象的属性
+      // val 被修改的新值
+      // receiver 被代理的对象
+      const proxyObj = new Proxy(obj, {
+        set(target, key, val, receiver) {
+          console.log(`监听了${key},值是${val}`);
+          target[key] = val;
+        },
+
+        get(target, key) {
+          console.log(`监听了${key}`);
+          return target[key];
+        },
+
+        deleteProperty(target, key) {
+          delete target[key];
+        },
+
+        has(target, key) {
+          console.log(`${key}被判断是否存在${target}中`);
+          return key in target;
+        },
+      });
+
+      proxyObj.name = "jack";
+      proxyObj.address = "河南";
+      proxyObj.age;
+      delete proxyObj.address;
+      console.log("age" in proxyObj);
+    </script>
+  </body>
+</html>

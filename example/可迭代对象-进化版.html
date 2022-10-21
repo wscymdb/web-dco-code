@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 使普通对象变成可迭代对象
+      const infos = {
+        name: "11",
+        firends: ["jack", "rose", "lily"],
+        *[Symbol.iterator]() {
+          yield* Object.values(this);
+        },
+      };
+
+      for (let info of infos) {
+        console.log(info);
+      }
+    </script>
+  </body>
+</html>

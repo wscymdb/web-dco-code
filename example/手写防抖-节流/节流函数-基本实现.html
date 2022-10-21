@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <script>
+      function ymThrottle(cb, interval, immediate) {
+        // startTime不用Date.now()，用0
+        // 因为节流函数默认情况第一次是要触发的
+        // 用0的话第一次触发awaitTime一定是<=0
+        let startTime = 0;
+        const _throttle = function (...args) {
+          const nowTime = Date.now();
+          // 这一行代码是核心代码
+          // nowTime - startTime 表示代码执行开始到执行中任意时间的间隔
+          // interval - (nowTime - startTime) 表示用户传入的时间间隔减去执行的时间间隔
+          // 如果这个差值小于等于0的话就执行函数
+          const awaitTime = interval - (nowTime - startTime);
+          //
+          if (awaitTime <= 0) {
+            cb.apply(this, args);
+            // 将开始时间重新赋值，目的是计算下次的时间间隔
+            startTime = Date.now();
+          }
+        };
+        return _throttle;
+      }
+    </script>
+    <script>
+      const iptEl = document.querySelector("input");
+      let counter = 1;
+      iptEl.addEventListener(
+        "input",
+        ymThrottle(function (e) {
+          console.log(`发送${counter++}次网络请求`, this, e);
+        }, 1000)
+      );
+    </script>
+  </body>
+</html>

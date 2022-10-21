@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const names = ["a", "b", "c"];
+      let i = 0;
+      const namesIterator = {
+        next() {
+          if (i < names.length) {
+            return { done: false, value: names[i++] };
+          } else {
+            return { done: true, value: names[i++] };
+          }
+        },
+      };
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+    </script>
+  </body>
+</html>

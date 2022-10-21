@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const infos = {
+        firends: ["jack", "rose", "lily"],
+        [Symbol.iterator]() {
+          let index = 0;
+          let infoIterator = {
+            next: () => {
+              if (index < this.firends.length) {
+                return { done: false, value: this.firends[index++] };
+              } else {
+                return { done: true, value: undefined };
+              }
+            },
+          };
+          return infoIterator;
+        },
+      };
+
+      for (let info of infos) {
+        console.log(info);
+      }
+    </script>
+  </body>
+</html>

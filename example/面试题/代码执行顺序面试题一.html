@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("script start");
+
+      setTimeout(() => {
+        console.log("setTimeout1");
+        new Promise(function (resolve) {
+          resolve();
+        }).then(function () {
+          console.log("then4");
+        });
+        console.log("then2");
+      });
+
+      new Promise(function (resolve) {
+        console.log("promise1");
+        resolve();
+      }).then(function () {
+        console.log("then1");
+      });
+
+      setTimeout(() => {
+        console.log("setTimeout2");
+      });
+
+      console.log(2);
+
+      queueMicrotask(() => {
+        console.log("queueMicrotask1");
+      });
+
+      new Promise(function (resolve) {
+        resolve();
+      }).then(function () {
+        console.log("then3");
+      });
+
+      console.log("script end");
+
+      // script start
+      // promise1
+      // 2
+      // script end
+      // then1
+      // queueMicrotask1
+      // then3
+      // setTimeout1
+      // then2
+      // then4
+      // setTimeout2
+
+      /* 解析
+        1. main script代码执行
+        2. 打印script start
+        3. 遇到第一个setTimeout，将其放入宏任务队列
+        4. 遇到第一个new Promise 打印promise1，resolve()时 将then回调放入微任务队列
+        5. 遇到第二个setTimeout， 将其放入宏任务队列
+        5. 打印2
+        6. 遇到queueMicrotask，将回调放入微任务队列
+        7. 遇到第二个new Promise，resolve()时 将then回调放入微任务队列
+        8. 打印script end
+        9. 当前调用栈的代码执行完毕，去任务队列中找，根据浏览器在执行宏任务队列之前，会先清空微任务队列的机制，（队列是先进先出的数据结构）
+        10. 依次打印 then4  queueMicrotask1  then3
+        11. 执行宏任务的第一个回调 打印setTimeout1
+        12. 遇到一个new Promise resolve()时 将then的回调放入微任务队列
+        13. 打印then2
+        14. 当前宏任务执行完毕，执行下一个宏任务，监测微任务队列是否有任务
+        15. 打印then4（刚刚推入微任务的回调）
+        16. 执行宏任务队列的任务  打印setTimeout2
+      */
+    </script>
+  </body>
+</html>

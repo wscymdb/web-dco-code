@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button class="cancel">取消</button>
+    <script>
+      function ymDebounce(cb, delay) {
+        // 创建变量
+        let timer = null;
+        // 返回一个函数用来作为oninput的事件
+        const _debounce = function (...args) {
+          // 如果timer不是空 那么就清空计时器
+          // 如果delay时间内再次调用此函数那么上一次的计时器就会被清空
+          // 这就是防抖的核心代码
+          if (timer) clearTimeout(timer);
+          // 创建一个计时器
+          timer = setTimeout(() => {
+            cb.apply(this, args);
+            // 执行过后 将此次的计时器改为null
+            // 不写也行，写了更加严谨，让一起回归原本
+            timer = null;
+          }, delay);
+        };
+        // 取消防抖
+        _debounce.cancel = function () {
+          if (timer) clearTimeout(timer);
+          timer = null;
+          isInvoke = false;
+        };
+        return _debounce;
+      }
+    </script>
+    <script>
+      const iptEl = document.querySelector("input");
+      const cancelEl = document.querySelector(".cancel");
+      let counter = 1;
+
+      const debounce = ymDebounce(function (e) {
+        console.log(`发送${counter++}次网络请求`, this, e);
+      }, 500);
+      iptEl.addEventListener("input", debounce);
+
+      cancelEl.onclick = debounce.cancel;
+    </script>
+  </body>
+</html>

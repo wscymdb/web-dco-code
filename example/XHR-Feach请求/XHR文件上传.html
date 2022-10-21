@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" name="文件" id="file" />
+    <button class="submit">上传文件</button>
+    <script>
+      const fileEl = document.querySelector('#file')
+      const submitEl = document.querySelector('.submit')
+
+      submitEl.onclick = () => {
+        const form = new FormData()
+
+        const files = fileEl.files[0]
+        form.append(files)
+
+        const xhr = new XMLHttpRequest()
+
+        xhr.onload = function () {}
+
+        xhr.open('get', 'url')
+
+        xhr.setRequestHeader('Content-Type', 'application/multiplepart')
+        xhr.send(form)
+
+        console.log(files)
+      }
+    </script>
+  </body>
+</html>

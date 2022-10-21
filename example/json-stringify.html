@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Object.prototype.toJSON = () => {
+      //   return 123;
+      // };
+
+      let obj = {
+        name: "zs",
+        age: 12,
+      };
+
+      let stringify = JSON.stringify(
+        obj,
+        (key, val) => {
+          if (key === "name") return "sss";
+          return val;
+        },
+        2
+      );
+      console.log(stringify);
+      // 123
+
+      let parse = JSON.parse(stringify, (key, val) => {
+        if (key === "age") return val * 2;
+        return val;
+      });
+      console.log(parse);
+    </script>
+  </body>
+</html>

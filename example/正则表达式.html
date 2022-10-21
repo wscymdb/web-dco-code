@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const str = "abc cbA dba";
+      // const reg = new RegExp("a", "ig");
+      // const res = str.replaceAll(reg, "y");
+      // console.log(res);
+
+      // const str = "ababadfsfedfsf";
+      // const res = str.matchAll(/a/g);
+      // console.log(res.next());
+      // for (const item of res) {
+      //   console.log(item);
+      // }
+
+      // //  表示匹配紧挨着name左边的不可以是\w相关的(字母、数字、下划线)这之外其他的都行，右边则可以是任意
+
+      // const str = "my 我namea is zs";
+      // if (/\bname/gi.test(str)) {
+      //   console.log("first");
+      // }
+
+      // 取出时间
+      // const info = `time 12:00 eat some food 234:88`;
+      // const timeRe = /\b\d\d:\d\d\b/g;
+      // console.log(info.match(timeRe)); // [12:00]
+
+      // 获取文件名 .js  .jsx
+
+      // const file = [".python", ".js", ".jsx", ".html"];
+      // file.forEach((item) => {
+      //   if (/\.jsx?$/.test(item)) {
+      //     console.log(item);
+      //   }
+      // });
+
+      const message = "我最喜欢的一本书是《肖申克的救赎》和《小猪佩奇》";
+      //默认情况 .+ 是贪婪模式
+      // 获取的结果就是["《肖申克的救赎》和《小猪佩奇》"]
+      // 因为 》也是 .能够匹配到的
+      // const bookRe = /《.+》/g;
+
+      // 在后面加?表示开启惰性模式
+      // 表示找到一个符合的就将结果储存，然后继续后续查找
+      const bookRe = /《(.+?)》/g;
+      console.log(message.match(bookRe)); // ['《肖申克的救赎》', '《小猪佩奇》']
+    </script>
+  </body>
+</html>

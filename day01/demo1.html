@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* .box {
+        height: 200px;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      12
+      <div class="span">我是span</div>
+    </div>
+    <script>
+      let boxEl = document.querySelector(".box");
+      let spanEl = document.querySelector(".span");
+      boxEl.addEventListener(
+        "mouseover",
+        (e) => {
+          console.log("box");
+        },
+        true
+      );
+      spanEl.addEventListener(
+        "mouseover",
+        (e) => {
+          console.log("span");
+        },
+        true
+      );
+    </script>
+  </body>
+</html>

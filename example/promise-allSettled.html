@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const promise = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          reject("11");
+        }, 3000);
+      });
+      const promise1 = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          reslove("22");
+        }, 2000);
+      });
+      const promise2 = new Promise((reslove, reject) => {
+        setTimeout(() => {
+          reslove("33");
+        }, 1000);
+      });
+      Promise.allSettled([promise, promise1, promise2]).then((res) => {
+        console.log(res);
+      });
+      // [
+      //   { status: "rejected", reason: "11" },
+      //   { status: "fulfilled", value: "22" },
+      //   { status: "fulfilled", value: "33" },
+      // ];
+    </script>
+  </body>
+</html>

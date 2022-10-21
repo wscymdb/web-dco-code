@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "zs",
+        age: 19,
+      };
+
+      Reflect.defineProperty(obj, "name", {
+        configurable: false,
+        writable: false,
+      });
+      // 使用Reflect对对象进行操作，可以进行间接操作对象
+      // 可以返回一个Boolean值
+      // 如果对象的属性被保护起来了，那么可以判断操作是否成功
+      // 避免了严格模式下报错
+      const proxyObj = new Proxy(obj, {
+        set(target, key, newVal, receiver) {
+          let isConfig = Reflect.set(target, key, newVal, receiver);
+          // let isConfig = target[key];
+          console.log(isConfig);
+          if (!isConfig) {
+            console.log(`${key}属性不支持该操作`);
+          }
+        },
+      });
+      proxyObj.name = "河南";
+      console.log(proxyObj);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(name, age) {
+        console.log(this, name, age);
+      }
+      Function.prototype.capply = function (thisArg, otherArgs) {
+        thisArg =
+          thisArg === null || thisArg === undefined ? window : Object(thisArg);
+        Object.defineProperty(thisArg, "fn", {
+          enumerable: false,
+          configurable: true,
+          value: this,
+        });
+        thisArg.fn(...otherArgs);
+
+        delete thisArg.fn;
+      };
+
+      foo.capply({ name: "zs" }, ["jack", 19]);
+      foo.capply(123, ["jack", 19]);
+
+      Function.prototype.ccall = function (thisArg, ...otherArgs) {
+        thisArg =
+          thisArg === null || thisArg === undefined ? window : Object(thisArg);
+        Object.defineProperty(thisArg, "fn", {
+          enumerable: false,
+          configurable: true,
+          value: this,
+        });
+        thisArg.fn(...otherArgs);
+
+        delete thisArg.fn;
+      };
+
+      foo.ccall({ name: "zs" }, "jack", 19);
+      foo.ccall(123, "jack", 19);
+      foo.ccall(null, "jack", 19);
+    </script>
+  </body>
+</html>

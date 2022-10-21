@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const songs = `[00:00.99]沙漠骆驼 - 展展与罗罗\n[00:02.97]词：展展与罗罗\n[00:04.46]曲：展展与罗罗\n[00:26.45]我要穿越这片沙漠\n[00:28.51]找寻真的自我\n[00:30.50]身边只有一匹骆驼陪我\n[00:34.96]这片风儿吹过\n[00:37.15]那片云儿飘过\n[00:39.26]突然之间出现爱的小河\n[00:43.63]我跨上沙漠之舟\n[00:45.71]背上烟斗和沙漏\n[00:47.92]手里还握着一壶烈酒\n[00:52.35]漫长古道悠悠\n[00:54.51]说不尽喜怒哀愁\n[00:56.56]只有那骆驼奔忙依旧\n[01:01.08]什么鬼魅传说\n[01:03.12]什么魑魅魍魉妖魔\n[01:05.43]只有那鹭鹰在幽幽的高歌\n[01:09.81]漫天黄沙掠过\n[01:11.90]走遍每个角落\n[01:14.05]行走在无尽的苍茫星河\n[01:18.69]白天黑夜交错\n[01:20.80]如此妖娆婀娜`;
+      const songsArr = songs.split("\n");
+      const timeRe = /\[(?<mm>\d{2}):(?<ss>\d{2}).(?<ms>\d{2,3})\]/;
+      const resArr = [];
+      songsArr.forEach((item) => {
+        if (!item.match(timeRe)) return;
+        // 时间
+        let timeObj = item.match(timeRe).groups;
+        timeObj.mm = timeObj.mm * 60 * 1000;
+        timeObj.ss = timeObj.ss * 1000;
+        timeObj.ms = timeObj.ms * 1;
+        let time = timeObj.mm + timeObj.ss + timeObj.ms;
+        // 歌词内容
+        let content = item.replace(timeRe, "");
+        let songsObj = { time, content };
+        resArr.push(songsObj);
+      });
+      console.log(resArr);
+      // console.log(songsStr);
+
+      console.log(2 instanceof Date);
+    </script>
+  </body>
+</html>

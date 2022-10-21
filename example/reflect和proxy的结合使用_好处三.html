@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        _name: "zs",
+        set name(newVal) {
+          this._name = newVal;
+        },
+        get name() {
+          return this._name;
+        },
+      };
+
+      //  Reflect的receiver参数表示
+      //  set/get（obj中的set/get） 方法执行的时候的this
+
+      // 如果没有传入receiver，那么obj中的set在调用的时候只监听了一次
+      // 当调用proxyObj.name的时候其实是调用了两次set方法
+      // 第一次是调用了proxyObj的set，然后执行了Reflect.set（）
+      // 调用了obj的set方法，但是此时obj的set中的this指向的是obj
+      // 操作源对象，proxyObj无法监听到，所以只监听了一次
+
+      // 如果传入receiver，
+      // 当执行Reflect.set()，时候，obj的this已经变成了proxyObj这个代理对象
+      // this._name其实就是proxyObj._name
+      // 那么又会执行proxyObj的set方法，所以就可以监听两次
+
+      // get方法和上述同理
+
+      // 如果不使用Reflect的方法操作对象，那么也只会监听一次，因为obj的this就是指向obj本身
+      // 所以 如果想要监听两次操作，就使用Reflect，如果不在乎的话，也可以使用target[key]
+
+      let proxyObj = new Proxy(obj, {
+        set(target, key, newVal, receiver) {
+          console.log("设置了值");
+          Reflect.set(target, key, newVal, receiver);
+        },
+        get(target, key, receiver) {
+          console.log("获取了值");
+          return Reflect.get(target, key, receiver);
+        },
+      });
+
+      proxyObj.name = "123";
+      proxyObj.name;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 有running和flayer两个类
+      // bird类想要继承这两个类
+
+      // class Running {
+      //   run() {
+      //     console.log('running~')
+      //   }
+      // }
+      // class Flayer {
+      //   flay() {
+      //     console.log('flay~')
+      //   }
+      // }
+
+      // 使用mixin混入的思想
+      // return class extends basicClass
+      // 表示 返回一个新的继承basicClass的类
+      // 外界接收到这个值就是一个新类并且继承了basicClasss类
+      function mixinRunning(basicClass) {
+        return class extends basicClass {
+          run() {
+            console.log("running~");
+          }
+        };
+      }
+
+      function mixinFlayer(basicClass) {
+        return class extends basicClass {
+          flay() {
+            console.log("flayer~");
+          }
+        };
+      }
+
+      class Bird {
+        eat() {
+          console.log("eating~");
+        }
+      }
+
+      // 方案1
+      // let NewBird = mixinRunning(mixinFlayer(Bird));
+
+      // 方案2
+      class NewBird extends mixinRunning(mixinFlayer(Bird)) {}
+      let bird1 = new NewBird();
+      console.log(bird1);
+    </script>
+  </body>
+</html>

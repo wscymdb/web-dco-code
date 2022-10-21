@@ -1,0 +1,20 @@
+.wrapper_01 {
+  width: 980px;
+  margin: 0 auto;
+}
+.wrapper_02 {
+width: 1100px;
+margin: 0 auto;
+}
+.wrapper_03 {
+width: 982px;
+margin: 0 auto;
+}
+
+
+
+.topbar_host_icon {
+  width: 28px;
+  height: 19px;
+  background: url("./../images/topbar_sprite.png") -190px 0;
+}

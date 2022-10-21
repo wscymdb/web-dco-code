@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="ul">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+    </ul>
+
+    <script>
+      let ulEl = document.querySelector(".ul");
+      let activeEl = null;
+      ulEl.addEventListener("click", (e) => {
+        if (e.target.nodeName !== "LI") return;
+        activeEl && activeEl.classList.remove("active");
+        e.target.classList.add("active");
+        activeEl = e.target;
+      });
+
+      document.addEventListener("contextmenu", (e) => {
+        console.log(e);
+      });
+    </script>
+  </body>
+</html>

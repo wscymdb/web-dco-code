@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const infos = {
+        name: "jack",
+        age: 19,
+        height: 1.88,
+        [Symbol.iterator]() {
+          // 获取值
+          let values = Object.values(this);
+          let index = 0;
+
+          let iterator = {
+            next: () => {
+              if (index < values.length) {
+                return { done: false, value: values[index++] };
+              } else {
+                return { done: true, value: undefined };
+              }
+            },
+            return() {
+              console.log("进入终端监测");
+              return { done: true };
+            },
+          };
+          return iterator;
+        },
+      };
+      const [name] = infos;
+      // console.log(name);
+    </script>
+  </body>
+</html>

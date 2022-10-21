@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>王者荣耀-header</title>
+    <link rel="stylesheet" href="./../css/reset.css" />
+    <link rel="stylesheet" href="./../css/common.css" />
+    <style>
+      .header {
+        height: 84px;
+        min-width: 1300px;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .header .area {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        color: #c9c9dd;
+      }
+      .header .area a {
+        color: #c9c9dd;
+      }
+      .header .left-area {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .header .left-area .logo a {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+        width: 200px;
+        height: 54px;
+        text-indent: -9999px;
+        background: url("./../images/logo\ \(1\).png");
+      }
+      .header .left-area .nav-list {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 25px;
+      }
+      .header .left-area .nav-list .item {
+        flex-shrink: 0;
+        width: 110px;
+        text-align: center;
+      }
+      .header .left-area .nav-list .item:hover {
+        background: url("./../images/main_sprite.png") no-repeat 0 0;
+      }
+      .header .left-area .nav-list .item.active {
+        background: url("./../images/main_sprite.png") no-repeat 0 0;
+      }
+      .header .left-area .nav-list .item.active a,
+      .header .left-area .nav-list .item.active .desc {
+        color: #f3c258;
+      }
+      .header .left-area .nav-list .item a {
+        display: block;
+        height: 100%;
+        box-sizing: border-box;
+        padding-top: 25px;
+        font-size: 18px;
+      }
+      .header .left-area .nav-list .item a .desc {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #858792;
+      }
+      .header .right-area {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+      }
+      .header .right-area .img {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+        border: 1px solid #d9ad50;
+        border-radius: 50%;
+      }
+      .header .right-area .info {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="area wrapper_1300">
+        <div class="left-area">
+          <h1 class="logo">
+            <a href="#">王者荣耀</a>
+          </h1>
+          <ul class="nav-list">
+            <li class="item active">
+              <a href="#"
+                >游戏资料
+                <span class="desc">DATA</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >内容中心
+                <span class="desc">CONTENTS</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >赛事中心
+                <span class="desc">MATCH</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >百态王者
+                <span class="desc">CULTURE</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >社区互动
+                <span class="desc">COMMUNITY</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >玩家支持
+                <span class="desc">PLAYER</span>
+              </a>
+            </li>
+            <li class="item">
+              <a href="#"
+                >IP新游戏
+                <span class="desc">NEW GAMES</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="right-area">
+          <div class="img">
+            <img src="./../images/header_right.png" alt="" />
+          </div>
+          <div class="info">
+            <span href="#">欢迎登录</span>
+            <p>登录后可查看游戏战绩</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

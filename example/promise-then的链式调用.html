@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // then方法返回一个新的promise，这个新的promise的决议（resolve/reject）是等到then方法传入的回调函数有返回值时进行决议的
+      const promise = new Promise((resolve, reject) => {
+        resolve("sss");
+      });
+
+      // then方法中的返回值的类型(见上面的)
+      // 普通值
+      // 新的Promise
+      // thenable对象（对象中有then方法）
+      promise
+        .then((res) => {
+          console.log(res);
+          return "aaa";
+        })
+        .then((res) => {
+          console.log(res);
+        });
+
+      // then方法相当于做了以下的操作
+      // 所以如果then方法中没有返回值，那么下个then方法中的结果就是undefined
+      function then(cb) {
+        let res = cb();
+        return new Promise((resolve, reject) => {
+          resolve(res);
+        });
+      }
+    </script>
+  </body>
+</html>

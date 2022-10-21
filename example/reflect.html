@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "zs",
+        age: 19,
+      };
+      // 返回 对象本身
+      console.log(
+        Object.defineProperty(obj, "name", {
+          configurable: false,
+        })
+      );
+      // 返回Boolean值  false上面设置了configurable：false
+      console.log(
+        Reflect.defineProperty(obj, "name", {
+          enumerable: false,
+        })
+      );
+
+      // 都返回Boolean 但是后者的书写的语义更加明确
+      console.log(delete obj.name); // false
+      console.log(Reflect.deleteProperty(obj, "name")); // false
+    </script>
+  </body>
+</html>

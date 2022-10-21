@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="nav-btn">click me</button>
+    <script>
+      class ymEventBus {
+        constructor() {
+          this.eventMap = {}
+        }
+
+        // 监听
+        on(eventName, eventFn) {
+          let eventFns = this.eventMap[eventName]
+
+          if (!eventFns) {
+            eventFns = []
+            this.eventMap[eventName] = eventFns
+          }
+
+          eventFns.push(eventFn)
+        }
+        // 发射
+        emit(eventName, ...args) {
+          let eventFns = this.eventMap[eventName]
+          if (!eventFns) return
+
+          eventFns.forEach((fn) => fn(...args))
+        }
+
+        // 取消
+        off(eventName, eventFn) {
+          let eventFns = this.eventMap[eventName]
+          if (!eventFns) return
+
+          this.eventMap[eventName] = eventFns.filter((fn) => fn !== eventFn)
+
+          if (!this.eventMap[eventName].length) {
+            delete this.eventMap[eventName]
+          }
+        }
+      }
+
+      const bus = new ymEventBus()
+
+      const fn1 = (...args) => {
+        console.log('vabClick 01', args)
+      }
+      const fn2 = (...args) => {
+        console.log('vabClick 02', args)
+      }
+      bus.on('navClick', fn1)
+      bus.on('navClick', fn2)
+
+      const btnEl = document.querySelector('.nav-btn')
+      btnEl.onclick = function () {
+        console.log('自己触发')
+        bus.emit('navClick', '男', 19, 1.88)
+        bus.off('navClick', fn1)
+        console.log(bus)
+      }
+      console.log(bus)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this._name = name;
+          this.age = age;
+        }
+
+        say() {
+          console.log("sss");
+        }
+      }
+      let p1 = new Person("zs", 18);
+      class Rectangle {
+        constructor(x, y, width, height) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+        }
+
+        get postion() {
+          return { x: this.x, y: this.y };
+        }
+
+        get size() {
+          return { width: this.width, height: this.height };
+        }
+      }
+      let rect1 = new Rectangle(10, 20, 100, 200);
+      console.log(rect1.postion);
+      console.log(rect1.size);
+    </script>
+  </body>
+</html>

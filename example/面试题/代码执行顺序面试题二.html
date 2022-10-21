@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function async1() {
+        console.log('async1 start')
+        await async2()
+        console.log('async end')
+      }
+
+      async function async2() {
+        console.log('async2')
+      }
+
+      console.log('script start')
+
+      setTimeout(() => {
+        console.log('setTimeput')
+      }, 0)
+
+      async1()
+
+      new Promise((resolve) => {
+        console.log('promise1')
+        resolve()
+      }).then(() => {
+        console.log('promise2')
+      })
+
+      console.log('script end')
+
+      // script start
+      // async1 start
+      // async2
+      // promise1
+      // script end
+      // async end
+      // promise2
+      // setTimeput
+      /*
+        1. main script执行
+        2. 打印script start
+        3. 执行setTimeout，将其给执行异步操作的线程，当时间结束后，异步操作的线程将其放入宏任务队列
+        4. 执行async1()
+        5. 打印async1 start
+        6. 执行 await async2()
+        7. 打印 async2
+        8. async2函数返回值相当于 Promise.resolve(undefined)
+        9. async1中的await等到了fulfilled状态，将其后续代码加入到微任务中
+        10. 执行new Promise 打印promise1
+        11. 执行resolve（） 将then代码推入微任务队列
+        12. 打印script end
+        13. 执行微任务队列代码 依次打印async end  promise2
+        14. 执行宏任务队列任务， 打印setTimeput
+      */
+    </script>
+  </body>
+</html>

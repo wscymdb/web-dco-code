@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 5rem;
+        height: 5rem;
+        background-color: #aff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script>
+    let htmlEl = document.documentElement;
+    console.log("===>", htmlEl);
+    window.addEventListener("resize", () => {
+      // 获取视口的宽度
+      let htmlWidth = htmlEl.clientWidth;
+
+      let htmlFontSize = htmlWidth / 10;
+      // 设置html的font-size大小
+      htmlEl.style.fontSize = htmlFontSize + "px";
+    });
+  </script>
+</html>

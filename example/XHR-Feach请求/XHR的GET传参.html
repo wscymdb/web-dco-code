@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const url = 'http://123.207.32.32:8000/home/multidata'
+      const url1 = 'http://180.76.235.241:3000/media/list?a=1&b=2'
+      const form = {}
+
+      // 1.创建异步对象
+      const xhr = new XMLHttpRequest()
+      // 2. 监听状态的改变
+      xhr.onreadystatechange = () => {
+        console.log(xhr.status)
+        if (xhr.readyState !== 4) return
+        // const json = JSON.parse(xhr.response)
+        console.log(xhr.response)
+      }
+
+      // 设置返回的类型 默认是text（根据返回数据的类型设置）
+      xhr.responseType = 'json'
+      // 3.配置请求open
+      xhr.open('get', url1)
+
+      // 4. 发送请求
+      xhr.send()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        background-color: #faa;
+      }
+      span {
+        width: 100px;
+        height: 100px;
+        background-color: #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <span>1234</span>
+    </div>
+
+    <script>
+      let box = document.querySelector(".box");
+      let span = document.querySelector("span");
+      box.addEventListener("mouseenter", (e) => {
+        console.log(e);
+        console.log("box mouseenter");
+      });
+      // box.addEventListener("mouseleave", () => {
+      //   console.log("box mouseout");
+      // });
+
+      // span.addEventListener("mouseenter", () => {
+      //   console.log("span mouseenter");
+      // });
+      // span.addEventListener("mouseleave", () => {
+      //   console.log("span mouseout");
+      // });
+
+      // box.addEventListener("mouseover", () => {
+      //   console.log("box mouseenter");
+      // });
+      // box.addEventListener("mouseout", () => {
+      //   console.log("box mouseout");
+      // });
+
+      // span.addEventListener("mouseover", () => {
+      //   console.log("span mouseenter");
+      // });
+      // span.addEventListener("mouseout", () => {
+      //   console.log("span mouseout");
+      // });
+    </script>
+  </body>
+</html>

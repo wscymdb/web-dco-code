@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Function.prototype.cbind = function (thisArg, ...otherArgs) {
+        thisArg = thisArg === null || thisArg === undefined ? window : thisArg;
+        Object.defineProperty(thisArg, "fn", {
+          configurable: true,
+          value: this,
+        });
+
+        return (...args) => {
+          let rest = [...otherArgs, ...args];
+          thisArg.fn(...rest);
+        };
+      };
+
+      function foo(name, age, add) {
+        console.log(this, name, age, add);
+      }
+
+      let newFoo = foo.cbind({ name: "zs" }, "jack", 18);
+      newFoo("henna");
+      newFoo("henna");
+    </script>
+  </body>
+</html>

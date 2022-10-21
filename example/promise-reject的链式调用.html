@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const promise = new Promise((resolve, reject) => {
+        reject("ee");
+      });
+
+      // catch方法也会返回一个新的Promise
+      // catch方法默认返回undefined
+      // 如果写了return 或者默认的返回，那么决议就是resolve，链式调用的下一级就会进入到then方法中
+      // 所以默认情况下不能一直.catch().catch()调用
+      // 如果想使用.catch.catch，那么可以在每个catch中抛出一个异常，这样就可以一直被catch所捕获
+      promise
+        .catch((err) => console.log(err)) //ee
+        .then((res) => console.log(res)) // undefined
+        .then((res) => console.log(res)); // undefined
+
+      const promise1 = new Promise((resolve, reject) => {
+        resolve("ee");
+      });
+
+      // 如果有promise的决议是reject的，那么会找到最近的catch方法进行调用
+      // 所以下面代码会在执行第一个then后，直接执行catch方法
+      // 使用throw 或者 return一个新的promise（决议是reject）都会进入catch中
+      promise1
+        .then((res) => {
+          console.log(res, "asa");
+          throw new Error("报错");
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+      // catch方法相当于做了以下的操作
+      function catch1(cb) {
+        let res = cb();
+        return new Promise((resolve, reject) => {
+          resolve(res);
+        });
+      }
+    </script>
+  </body>
+</html>

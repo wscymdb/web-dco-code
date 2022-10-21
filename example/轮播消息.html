@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .nav-bar {
+        display: flex;
+        align-items: center;
+        transition: all 1s linear;
+      }
+      .icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+        border-radius: 8px;
+        transition: all 1s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <img class="icon" src="http://www.wscym.top:3000/images/1.jpg" />
+      <div class="title">hhh戳了戳你</div>
+    </div>
+
+    <script>
+      let navBarJson = [
+        {
+          icon: "http://www.wscym.top:3000/images/1.jpg",
+          title: "张桑那个",
+        },
+        {
+          icon: "http://www.wscym.top:3000/images/zw.png",
+          title: "奥里给",
+        },
+        {
+          icon: "http://www.wscym.top:3000/images/yw.jpg",
+          title: "大傻春",
+        },
+      ];
+
+      let iconEl = document.querySelector(".icon");
+      let titleEl = document.querySelector(".title");
+
+      let currentIndex = 0;
+
+      setInterval(() => {
+        if (currentIndex === navBarJson.length) currentIndex = 0;
+        let item = navBarJson[currentIndex];
+        iconEl.src = item.icon;
+        titleEl.textContent = item.title;
+        currentIndex++;
+      }, 3000);
+    </script>
+  </body>
+</html>

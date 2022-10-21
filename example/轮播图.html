@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./iconfont/iconfont.css" />
+    <title>Document</title>
+    <style>
+      .banner {
+        position: relative;
+        height: 400px;
+        width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+      .imgs {
+        position: relative;
+        left: 0;
+        display: flex;
+        justify-content: flex-end;
+        transition: all 0.3s linear;
+      }
+      .item {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      .iconfont {
+        font-size: 80px;
+        /* color: rgba(255, 255, 255, 0.5); */
+        color: #000;
+        cursor: pointer;
+        z-index: 999;
+      }
+      .icon-angle-left {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+      .icon-angle-right {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <span class="iconfont icon-angle-left"></span>
+      <span class="iconfont icon-angle-right"></span>
+      <div class="imgs">
+        <div class="item">
+          <img src="./images/banner_1.png" alt="" />
+        </div>
+        <div class="item">
+          <img src="./images/banner_2.png" alt="" />
+        </div>
+        <div class="item">
+          <img src="./images/banner_3.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let leftEl = document.querySelector(".icon-angle-left");
+      let rightEl = document.querySelector(".icon-angle-right");
+      let imgEl = document.querySelector(".imgs");
+
+      let left = 0;
+
+      rightEl.addEventListener("click", () => {
+        if (left === 1600) {
+          left = 0;
+          imgEl.style.cssText = `transition: none`;
+          imgEl.style.left = 0;
+          return;
+        }
+
+        imgEl.style.cssText = ` transition: all .3s linear`;
+        left += 800;
+        imgEl.style.left = left + "px";
+      });
+
+      leftEl.addEventListener("click", () => {
+        if (left >= 1600) {
+          left = -1600;
+          imgEl.style.cssText = `transition: none`;
+          imgEl.style.left = left;
+          return;
+        }
+
+        imgEl.style.cssText = ` transition: all 0.3s linear`;
+        left += 800;
+        imgEl.style.left = left + "px";
+      });
+
+      setInterval(() => {
+        // leftEl.click();
+      }, 5000);
+    </script>
+  </body>
+</html>

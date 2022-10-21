@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 函数作用： 创建一个空对象，对象的隐式原型指向o
+      function createObject(o) {
+        function F() {}
+        F.prototype = o;
+        return new F();
+      }
+      // 继承的函数
+      function inherit(subType, superType) {
+        // 如果适配早期的浏览器，那么就不能使用Object.crate()
+        // subTyp.prototype = Object.create(superType.prototype);
+        subType.prototype = createObject(superType.prototype);
+        Object.defineProperty(subType.prototype, "constructor", {
+          enumerable: false,
+          configurable: true,
+          writable: true,
+          value: subType,
+        });
+      }
+
+      // 实现继承
+
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      Person.prototype.say = () => console.log("say Person");
+
+      function Student(name, age, score) {
+        Person.call(this, name, age);
+        this.score = score;
+      }
+
+      inherit(Student, Person);
+
+      let s1 = new Student("jack", 19, 98);
+      console.log(s1);
+    </script>
+  </body>
+</html>

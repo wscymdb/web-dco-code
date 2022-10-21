@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 有以下场景，要按顺序调用三次网络请求
+      function getRequestUrl(arg) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(arg);
+          }, 1000);
+        });
+      }
+
+      // 方案一
+      // function* getData() {
+      //   const res1 = yield getRequestUrl("第一次");
+      // console.log(res1);
+      //   const res2 = yield getRequestUrl(res1 + "第二次");
+      // console.log(res2);
+      //   const res3 = yield getRequestUrl(res2 + "第三次");
+      // console.log(res3);
+      // }
+
+      // const generator = getData();
+
+      // generator.next().value.then((res) => {
+      //   console.log(res);
+      //   generator.next(res).value.then((res) => {
+      //     console.log(res);
+      //     generator.next(res).value.then((res) => {
+      //       console.log(res);
+      //     });
+      //   });
+      // });
+
+      //
+      async function getData() {
+        const res1 = await getRequestUrl("第一次");
+        console.log(res1);
+        const res2 = await getRequestUrl(res1 + "第二次");
+        console.log(res2);
+        const res3 = await getRequestUrl(res2 + "第三次");
+        console.log(res3);
+      }
+
+      const generator = getData();
+    </script>
+  </body>
+</html>

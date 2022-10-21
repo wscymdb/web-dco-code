@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // let obj = { name: "zs" };
+      // let arr = [obj];
+      // let ws = new WeakSet(arr);
+      // console.log(ws);
+
+      const wSet = new WeakSet();
+      class Person {
+        constructor() {
+          wSet.add(this);
+        }
+
+        running() {
+          if (!wSet.has(this)) {
+            throw Error("类型不对");
+          }
+          console.log("first");
+        }
+      }
+      let p = new Person();
+      p.running();
+      let a = p.running;
+      a();
+    </script>
+  </body>
+</html>

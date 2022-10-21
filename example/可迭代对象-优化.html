@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const infos = {
+        name: "jack",
+        age: 19,
+        height: 1.88,
+        [Symbol.iterator]() {
+          // 获取key
+          // let keys = Object.keys(this);
+          // 获取值
+          // let values = Object.values(this);
+          // 获取entries(键值对)
+          let entries = Object.entries(this);
+          let index = 0;
+
+          let iterator = {
+            next: () => {
+              if (index < entries.length) {
+                return { done: false, value: entries[index++] };
+              } else {
+                return { done: true, value: undefined };
+              }
+            },
+          };
+          return iterator;
+        },
+      };
+
+      console.log([...infos].flat());
+      for (let info of infos) {
+        console.log(info);
+      }
+    </script>
+  </body>
+</html>

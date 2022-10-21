@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        say() {
+          console.log(`${this.name} is say`);
+        }
+        drink() {
+          console.log(`${this.name} is drank`);
+        }
+      }
+
+      class Student extends Person {
+        constructor(name, age, sno) {
+          super(name, age);
+          this.sno = sno;
+        }
+        drink() {
+          super.drink();
+        }
+      }
+
+      let s1 = new Student("zs", 18, 1001);
+      s1.say();
+      s1.drink();
+      console.log(s1);
+    </script>
+  </body>
+</html>

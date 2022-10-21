@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        // 所有实例都可有这个属性
+        height = 1.88;
+        constructor() {}
+        // 类的静态属性
+        static address = "河南";
+        // 类的静态私有属性, 只有类内部能够访问
+        static #number = 12;
+        // 类的静态代码块
+        static {
+          console.log("只有类初始化时候执行一次");
+          console.log(this.#number);
+        }
+        #sex = 12;
+      }
+      console.log(Person.number);
+      console.log(Person.address);
+    </script>
+  </body>
+</html>
