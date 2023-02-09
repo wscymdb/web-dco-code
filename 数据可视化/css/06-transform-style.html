@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background: url("./imgs//R-C.png");
+        margin: 0;
+        padding: 0;
+      }
+      .fat {
+        width: 200px;
+        height: 200px;
+        background-color: #afa;
+        margin: 100px auto;
+        perspective: 400px;
+        transform-style: preserve-3d;
+      }
+      .son {
+        width: 100%;
+        height: 100%;
+        background-color: skyblue;
+        transform: rotateX(75deg) translateX(40px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fat">
+      <div class="son"></div>
+    </div>
+  </body>
+</html>

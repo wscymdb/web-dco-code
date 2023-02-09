@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}}</h1>
+      <button @click="handleClick(10,$event)" v-show="isShow">click me</button>
+      <input type="text" @keyup.enter="handleClick" />
+      <h2>name:{{name}}</h2>
+      <h1>{{info}}</h1>
+      <button @click="changeNum">change</button>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            msg: "哈哈哈哈",
+            isShow: false,
+            name1: "尼古拉斯",
+            name2: "赵四",
+            info: { name: "zs", age: 18 },
+          };
+        },
+        methods: {
+          handleClick(num, e) {
+            console.log(num, e);
+          },
+          changeNum() {
+            this.info = { name: "zs", age: 22 };
+          },
+          aa(curr, previous) {
+            console.log(curr);
+            console.log(previous);
+            console.log(Vue.toRaw(previous));
+            console.log(Vue.toRaw(previous) === previous);
+          },
+        },
+        computed: {
+          name() {
+            return this.name1 + " " + this.name2;
+          },
+        },
+        watch: {
+          // info(curr, previous) {
+          //   console.log(curr);
+          //   console.log(previous);
+          //   console.log(Vue.toRaw(previous));
+          //   console.log(Vue.toRaw(previous) === previous);
+          // },
+          info: "aa",
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

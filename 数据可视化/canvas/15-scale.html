@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #tutorial {
+        background-color: #aff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tutorial" width="300" height="300"></canvas>
+
+    <script>
+      window.onload = () => {
+        let canvasEl = document.querySelector("#tutorial");
+        /** @type {CanvasRenderingContext2D} */
+
+        let ctx = canvasEl.getContext("2d");
+
+        ctx.save();
+
+        ctx.translate(100, 100);
+        ctx.scale(1, 3);
+        ctx.fillRect(0, 0, 50, 50);
+
+        ctx.restore();
+        // todo
+      };
+    </script>
+  </body>
+</html>

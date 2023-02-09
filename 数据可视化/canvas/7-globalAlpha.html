@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #tutorial {
+        background-color: rgba(0, 250, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tutorial" width="300" height="300"></canvas>
+
+    <script>
+      window.onload = () => {
+        let canvasEl = document.querySelector("#tutorial");
+
+        let ctx = canvasEl.getContext("2d");
+
+        ctx.globalAlpha = 0.9;
+
+        for (let i = 1; i < 9; i++) {
+          let r = Math.floor(Math.random() * 255);
+          let g = Math.floor(Math.random() * 255);
+          let b = Math.floor(Math.random() * 255);
+          let x = i * 30;
+          let y = 100;
+          ctx.beginPath();
+          ctx.rect(x, y, 29, 29);
+          ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+          ctx.fill();
+        }
+      };
+    </script>
+  </body>
+</html>

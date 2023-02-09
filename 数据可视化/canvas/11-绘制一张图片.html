@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #tutorial {
+        background-color: #aff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tutorial" width="500" height="500"></canvas>
+
+    <script>
+      window.onload = () => {
+        let canvasEl = document.querySelector("#tutorial");
+        /** @type {CanvasRenderingContext2D} */
+
+        let ctx = canvasEl.getContext("2d");
+        let image = new Image();
+        image.src =
+          "https://tse1-mm.cn.bing.net/th/id/OIP-C.DK8kOoEeF4PsnuI7ZGbYpAHaHa?pid=ImgDet&rs=1";
+
+        image.onload = () => {
+          ctx.drawImage(image, 0, 0);
+
+          ctx.beginPath();
+          ctx.moveTo(20, 80);
+          ctx.lineTo(40, 90);
+          ctx.lineTo(60, 30);
+          ctx.lineTo(80, 80);
+          ctx.lineTo(100, 200);
+          ctx.lineTo(120, 20);
+
+          ctx.stroke();
+        };
+      };
+    </script>
+  </body>
+</html>

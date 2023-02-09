@@ -1,0 +1,118 @@
+html, body {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2b3a42;
+
+}
+
+.webpack-logo {
+  width: 100%;
+  /* height: 400px;
+  border: 1px solid #fff; */
+}
+
+.webpack-logo .inner {
+  width: 100px;
+  height: 100px;
+  bottom: -146px;
+  animation: innerCube 6s ease-in-out infinite;
+
+}
+
+.webpack-logo .outer {
+  width: 200px;
+  height: 200px;
+  animation: outerCube 6s ease-in-out infinite;
+}
+
+.webpack-logo .item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+}
+.webpack-logo .common {
+  position: relative;
+  margin: auto;
+  transform-style: preserve-3d;
+  transform: rotateX(-33.5deg) rotateY(45deg) ;
+}
+
+.webpack-logo .inner .top {
+  background-color: rgba(82, 153, 200, 1);
+  transform: rotateX(90deg) translateZ(50px);
+}
+.webpack-logo .inner .bottom {
+  background-color: rgba(82, 153, 200, 1);
+  transform: rotateX(90deg) translateZ(-50px);
+}
+.webpack-logo .inner .front {
+  background-color: rgba(82, 153, 200, 1);
+  transform: rotateY(90deg) translateZ(-50px);
+
+}
+.webpack-logo .inner .back {
+  background-color: rgba(82, 153, 200, 1);
+  transform: rotateY(90deg) translateZ(50px);
+}
+.webpack-logo .inner .left {
+  background-color: rgba(82, 153, 200, 1);
+  transform:  translateZ(-50px);
+}
+.webpack-logo .inner .right {
+  background-color: rgba(82, 153, 200, 1);
+  transform:  translateZ(50px);
+}
+
+.webpack-logo .outer .top {
+  background-color: rgba(117, 175, 204, .3);
+  transform: rotateX(90deg) translateZ(100px);
+}
+.webpack-logo .outer .bottom {
+  background-color: rgba(117, 175, 204, .3);
+  transform: rotateX(90deg) translateZ(-100px);
+}
+.webpack-logo .outer .front {
+  background-color: rgba(117, 175, 204, .3);
+  transform: rotateY(90deg) translateZ(-100px);
+}
+.webpack-logo .outer .back {
+  background-color: rgba(117, 175, 204, .3);
+  transform: rotateY(90deg) translateZ(100px);
+}
+.webpack-logo .outer .left {
+  background-color: rgba(117, 175, 204, .3);
+  transform:  translateZ(-100px);
+}
+.webpack-logo .outer .right {
+  background-color: rgba(117, 175, 204, .3);
+  transform:  translateZ(100px);
+}
+
+
+@keyframes innerCube {
+  0% {
+    transform: rotateX(-33.5deg) rotateY(45deg);
+  }
+
+  50%, 100% {
+    transform: rotateX(-33.5deg) rotateY(-315deg);
+  }
+
+}
+
+@keyframes outerCube {
+  0% {
+    transform: rotateX(-33.5deg) rotateY(45deg);
+  }
+
+  50%, 100% {
+    transform: rotateX(-33.5deg) rotateY(315deg);
+  }
+}

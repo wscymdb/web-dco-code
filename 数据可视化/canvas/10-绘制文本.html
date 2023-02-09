@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #tutorial {
+        background-color: #aff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tutorial" width="300" height="300"></canvas>
+
+    <script>
+      window.onload = () => {
+        let canvasEl = document.querySelector("#tutorial");
+        /** @type {CanvasRenderingContext2D} */
+
+        let ctx = canvasEl.getContext("2d");
+
+        ctx.beginPath();
+        ctx.font = "30px   宋体 ";
+        ctx.textAlign = "left";
+        ctx.strokeStyle = "red";
+        // ctx.fillText("你好", 100, 100);
+        ctx.strokeText("你好", 100, 100);
+      };
+    </script>
+  </body>
+</html>

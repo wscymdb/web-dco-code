@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <label for="couunt">
+        账号
+        <input type="text" id="couunt" v-model="msg" />
+      </label>
+
+      <hr />
+      <div class="hobbies">
+        <label for="sing">
+          <input type="checkbox" id="sing" v-model="hobbies" value="唱" />唱
+        </label>
+        <label for="dance">
+          <input type="checkbox" id="dance" v-model="hobbies" value="跳" />跳
+        </label>
+        <h2>{{hobbies}}</h2>
+      </div>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            msg: "hahha",
+            hobbies: [],
+          };
+        },
+        methods: {},
+      }).mount("#app");
+    </script>
+  </body>
+</html>

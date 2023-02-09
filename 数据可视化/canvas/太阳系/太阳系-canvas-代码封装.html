@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #tutorial {
+        background-color: #aff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tutorial" width="300" height="300"></canvas>
+    <script>
+      window.onload = function () {
+        const canvasEl = document.querySelector("#tutorial");
+        const ctx = canvasEl.getContext("2d");
+
+        /** @type {CanvasRenderingContext2D} */
+
+        const sun = new Image();
+        const earth = new Image();
+        const moon = new Image();
+
+        sun.src = "./../images/canvas_sun.png";
+        earth.src = "./../images/canvas_earth.png";
+        moon.src = "./../images/canvas_moon.png";
+
+        requestAnimationFrame(draw);
+
+        function draw() {
+          ctx.clearRect(0, 0, 300, 300);
+
+          ctx.save();
+
+          // 绘制背景
+          drawBg();
+
+          // 绘制地球
+          drawEarth();
+
+          ctx.restore();
+
+          requestAnimationFrame(draw);
+        }
+
+        function drawBg() {
+          ctx.save();
+          ctx.drawImage(sun, 0, 0);
+          // 绘制光环
+          ctx.strokeStyle = "rgba(0,153,255,0.4)";
+          ctx.translate(150, 150);
+          ctx.beginPath();
+          ctx.arc(0, 0, 105, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        function drawEarth() {
+          // 旋转用到的变量
+          let s = new Date().getSeconds();
+          let ms = new Date().getMilliseconds();
+          let pi = Math.PI * 2;
+
+          ctx.save();
+          ctx.translate(150, 150);
+          // 地球旋转
+          ctx.rotate((pi / 60) * s + (pi / (60 * 1000)) * ms);
+          ctx.translate(105, 0);
+
+          ctx.drawImage(earth, -12, -12);
+          // 绘制地球背面阴影
+          drawShadow();
+
+          // 绘制月球
+          drawMoon(pi, s, ms);
+
+          ctx.restore();
+        }
+
+        function drawMoon(pi, s, ms) {
+          ctx.save();
+          // 旋转月球
+          ctx.rotate((pi / 10) * s + (pi / (10 * 1000)) * ms);
+          ctx.translate(0, 28);
+          ctx.drawImage(moon, -3.5, -3.5);
+          ctx.restore();
+        }
+
+        function drawShadow() {
+          ctx.save();
+          ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+          ctx.fillRect(0, -15, 30, 30);
+          ctx.restore();
+        }
+      };
+    </script>
+  </body>
+</html>
