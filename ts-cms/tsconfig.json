@@ -1,0 +1,17 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  // element plus按需引入 会生成两个ts文件  让ts解析 否者类型不会提示
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue","auto-imports.d.ts", "components.d.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}
