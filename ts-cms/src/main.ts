@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import Router from './router'
-import Pinia from './store'
-import { registerIcons } from './global/register-icons'
+import Store from './store'
+import Icons from './global/register-icons'
 import 'normalize.css'
 import './assets/css/index.less'
 
@@ -12,4 +12,5 @@ import './assets/css/index.less'
 
 // console.log(import.meta.env)
 
-createApp(App).use(Router).use(Pinia).use(registerIcons).mount('#app')
+// 先注册store 因为store里会动态加载路由
+createApp(App).use(Store).use(Router).use(Icons).mount('#app')

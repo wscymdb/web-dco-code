@@ -5,19 +5,9 @@
         手机登录
         <el-icon><Iphone /></el-icon
       ></template>
-      <el-form
-        :model="formData"
-        :rules="rules"
-        label-width="auto"
-        status-icon
-        ref="formRef"
-      >
+      <el-form :model="formData" :rules="rules" label-width="10" status-icon ref="formRef">
         <el-form-item prop="phone">
-          <el-input
-            placeholder="请输入手机号"
-            size="large"
-            v-model="formData.phone"
-          />
+          <el-input placeholder="请输入手机号" size="large" v-model="formData.phone" />
         </el-form-item>
         <el-form-item prop="verifyCode" class="verify">
           <el-input
@@ -26,8 +16,12 @@
             class="verify-ipt"
             v-model="formData.verifyCode"
           />
-          <el-button size="large" :disabled="verifyDisabled"
-            >获取验证码</el-button
+          <el-button
+            :type="verifyType"
+            size="large"
+            :disabled="verifyDisabled"
+            @click="hadleVreifyCode"
+            >{{ verifyMsg }}</el-button
           >
         </el-form-item>
       </el-form>
@@ -36,14 +30,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
-import type { FormRules, FormInstance } from 'element-plus'
+import { reactive, ref, watch } from 'vue'
+import type { FormRules, FormInstance, ButtonType } from 'element-plus'
 
 // form
 const formData = reactive({
   phone: '',
   verifyCode: ''
 })
+
+const formRef = ref<FormInstance>()
+
 // 规则
 
 const rules: FormRules = {
@@ -54,8 +51,7 @@ const rules: FormRules = {
       trigger: 'blur'
     },
     {
-      pattern:
-        /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+      pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
       message: '请输入合法的手机号',
       trigger: 'blur'
     }
@@ -69,11 +65,48 @@ const rules: FormRules = {
   ]
 }
 
-const verifyDisabled = computed(() => {
-  return formData.phone ? false : true
-})
+const verifyMsg = ref('获取验证码')
+const verifyDisabled = ref(true)
+const verifyType = ref<ButtonType>('')
 
-const formRef = ref<FormInstance>()
+watch(
+  () => formData.phone,
+  () => {
+    formRef.value?.validateField('phone', (valid) => {
+      if (valid) {
+        verifyDisabled.value = false
+        verifyType.value = 'primary'
+      } else {
+        verifyDisabled.value = true
+        verifyType.value = ''
+      }
+    })
+  }
+)
+
+const hadleVreifyCode = () => {
+  formRef.value?.validateField('phone', (valid) => {
+    if (valid) {
+      let count = 60
+      verifyType.value = ''
+      verifyMsg.value = `${count}秒后获取`
+      let timer = setInterval(() => {
+        count--
+        verifyMsg.value = `${count}秒后获取`
+        verifyDisabled.value = true
+
+        if (count <= 0) {
+          clearInterval(timer)
+          count = 60
+          verifyMsg.value = `获取验证码`
+          verifyDisabled.value = false
+          verifyType.value = 'primary'
+        }
+      }, 1000)
+    }
+  })
+}
+
 // 提交
 const submit = () => {
   formRef.value?.validate((valid: boolean) => {
@@ -89,13 +122,8 @@ defineExpose({
 
 <style scoped lang="less">
 .pane-phone {
-  :v-deep .el-tabs__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   .verify {
-    :v-deep .el-form-item__content {
+    :deep(.el-form-item__content) {
       justify-content: space-between;
     }
 

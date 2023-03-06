@@ -12,25 +12,21 @@ class Cache {
   }
 
   setCache(key: string, value: any) {
-    if (value) {
-      let storage = this.getStorage()
-      storage[key] = value
+    let storage = this.getStorage()
+    storage[key] = value
 
-      this.storage.setItem(this.namespace, JSON.stringify(storage))
-    }
+    this.storage.setItem(this.namespace, JSON.stringify(storage))
   }
 
   getCache(key: string) {
-    let value = this.getStorage()[key]
-
-    if (value) return value
+    return this.getStorage()[key]
   }
 
   removeCach(key: string) {
     let val = this.getStorage()
     delete val[key]
 
-    localStorage.setItem(this.namespace, JSON.stringify(val))
+    this.storage.setItem(this.namespace, JSON.stringify(val))
   }
 
   clear() {
@@ -38,7 +34,7 @@ class Cache {
   }
 
   private getStorage() {
-    return JSON.parse(localStorage.getItem(this.namespace) || '{}')
+    return JSON.parse(this.storage.getItem(this.namespace) || '{}')
   }
 }
 

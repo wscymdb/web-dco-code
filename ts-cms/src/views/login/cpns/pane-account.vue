@@ -8,7 +8,7 @@
       <el-form
         :model="formData"
         :rules="rules"
-        label-width="auto"
+        label-width="10"
         status-icon
         ref="formRef"
       >
@@ -34,11 +34,15 @@ import { ref, reactive } from 'vue'
 import useLoginStore from '@/store/login/login'
 import type { FormRules, FormInstance } from 'element-plus'
 import type { IAccountLogin } from '@/types/login'
+import { sessionCache } from '@/utils/cache'
+
+const CACHE_NAME = 'name'
+const CACHE_PASSWORD = 'password'
 
 // 表单
 const formData = reactive<IAccountLogin>({
-  name: 'coderwhy',
-  password: '123456'
+  name: sessionCache.getCache(CACHE_NAME) ?? '',
+  password: sessionCache.getCache(CACHE_PASSWORD) ?? ''
 })
 const rules: FormRules = {
   name: [
@@ -65,7 +69,16 @@ const loginStore = useLoginStore()
 const submit = () => {
   formRef.value?.validate(async (valid: boolean) => {
     if (valid) {
-      loginStore.accountLoginAction({ ...formData })
+      loginStore.accountLoginAction({ ...formData }).then((res) => {
+        const isRemPwd = sessionCache.getCache('isRemPwd')
+        if (isRemPwd) {
+          sessionCache.setCache(CACHE_NAME, formData.name)
+          sessionCache.setCache(CACHE_PASSWORD, formData.password)
+        } else {
+          sessionCache.removeCach(CACHE_NAME)
+          sessionCache.removeCach(CACHE_PASSWORD)
+        }
+      })
     }
   })
 }

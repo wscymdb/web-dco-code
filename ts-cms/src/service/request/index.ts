@@ -1,10 +1,7 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
-import type {
-  YMAxiosRequestConfig,
-  YMInterceptors,
-  YMInstanceInterceptors
-} from './types'
+import { localCache } from '@/utils/cache'
+import type { YMAxiosRequestConfig, YMInterceptors, YMInstanceInterceptors } from './types'
 
 class YMRequest {
   instance: AxiosInstance
@@ -71,6 +68,10 @@ class YMRequest {
 
   delete<T = any>(config: YMAxiosRequestConfig<YMInstanceInterceptors<T>>) {
     return this.request({ method: 'DELETE', ...config })
+  }
+
+  patch<T = any>(config: YMAxiosRequestConfig<YMInstanceInterceptors<T>>) {
+    return this.request({ method: 'PATCH', ...config })
   }
 }
 

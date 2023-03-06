@@ -11,26 +11,28 @@
     <div class="control">
       <el-checkbox v-model="rememberPwd" label="记住密码" size="large" />
 
-      <el-link type="primary" @click="forgetPwd" title="我劝你别点"
-        >忘记密码</el-link
-      >
+      <el-link type="primary" @click="forgetPwd" title="我劝你别点">忘记密码</el-link>
     </div>
     <div class="login-btn">
-      <el-button type="primary" size="large" @click="handleSubmit"
-        >立即登录</el-button
-      >
+      <el-button type="primary" size="large" @click="handleSubmit">立即登录</el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { ElNotification } from 'element-plus'
 import PaneAccount from './pane-account.vue'
 import PanePhone from './pane-phone.vue'
+import { sessionCache } from '@/utils/cache'
 
-const activeName = ref('phone')
-const rememberPwd = ref(false)
+const activeName = ref('account')
+const rememberPwd = ref<boolean>(sessionCache.getCache('isRemPwd') ?? false)
+
+watch(rememberPwd, (curr) => {
+  console.log(curr)
+  sessionCache.setCache('isRemPwd', curr)
+})
 
 const forgetPwd = function () {
   ElNotification({
@@ -76,7 +78,12 @@ const handleSubmit = () => {
   }
 
   .el-tabs {
-    .el-icon {
+    :deep(.el-tabs__item) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    :deep(.el-icon) {
       font-size: 16px;
       margin-left: 3px;
     }
