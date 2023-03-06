@@ -1,33 +1,33 @@
-import IStack from "./IStack";
+import IStack from './IStack'
 
 // 基于数组的方式实现
 class Stack<T = any> implements IStack<T> {
   // 定义一个数组，用于存储元素
-  private data: any[] = [];
+  private data: any[] = []
 
   // push 将一个元素压入栈
   push(element: T) {
-    this.data.push(element);
+    this.data.push(element)
   }
 
   // pop  将一个元素弹出栈
   pop(): T | undefined {
-    return this.data.pop();
+    return this.data.pop()
   }
 
   // peek 查看栈顶元素，只是查看
   peek(): T | undefined {
-    return this.data[this.data.length - 1];
+    return this.data[this.data.length - 1]
   }
 
   // isEmpty  判断栈是否为空
   isEmpty(): boolean {
-    return this.data.length === 0;
+    return this.data.length === 0
   }
 
   // siz  返回栈的数据个数
-  size(): number {
-    return this.data.length;
+  get size(): number {
+    return this.data.length
   }
 }
 
@@ -42,6 +42,6 @@ class Stack<T = any> implements IStack<T> {
 
 // console.log("===>", s1.peek());
 // console.log("===>", s1.isEmpty());
-// console.log("===>", s1.size());
+// console.log("===>", s1.size);
 
-export default Stack;
+export default Stack
