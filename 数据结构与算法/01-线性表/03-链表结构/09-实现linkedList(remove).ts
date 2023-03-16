@@ -16,6 +16,17 @@ class LinkedList<T> {
     return this.size
   }
 
+  // 私有方法 根据索引获取节点
+  private getNode(position: number): Node<T> | null {
+    let index = 0
+    let current = this.head
+
+    while (index++ < position && current) {
+      current = current.next
+    }
+    return current
+  }
+
   // 追加节点
   append(item: T) {
     const newNode = new Node<T>(item)
@@ -69,17 +80,9 @@ class LinkedList<T> {
       newNode.next = this.head
       this.head = newNode
     } else {
-      let index = 0
-      // 如果当前元素是第1项的话，那么他就没有前一个节点
-      let previous: Node<T> | null = null // 前一个节点
-      let current = this.head // 后一个节点(在此节点插入这个节点就是后一个节点)
-      // 此循环一定能保证当前的元素的索引和position一致
-      while (index++ < position) {
-        previous = current
-        current = current?.next ?? null
-      }
+      let previous = this.getNode(position - 1)
 
-      newNode.next = current
+      newNode.next = previous!.next
       previous!.next = newNode
     }
     this.size++
@@ -108,19 +111,66 @@ class LinkedList<T> {
     if (position === 0) {
       this.head = current?.next ?? null
     } else {
-      let index = 0
-      let previous: Node<T> | null
-
-      while (index++ < position) {
-        previous = current
-        current = current!.next
-      }
-      // 这里表示已经找到了
-      // 当前虽然current依旧指向被删除的节点，但是current是局部变量，函数执行完后会被销毁
-      previous!.next = current?.next ?? null
+      let previous = this.getNode(position - 1)
+      current = previous?.next ?? null
+      previous!.next = previous?.next?.next ?? null
     }
     this.size--
     return current?.item ?? null
+  }
+
+  // 根据value删除
+  remove(value: T): T | null {
+    const index = this.indexOf(value)
+    return this.removeAt(index)
+  }
+
+  /**
+   * 根据下标获取节点
+   * @param position 要获取节点的下标
+   * @returns
+   */
+  get(position: number): T | null {
+    // 越界判断
+    if (position < 0 || position >= this.size) return null
+
+    return this.getNode(position)?.item ?? null
+  }
+
+  /**
+   * 修改
+   * @param value 要修改的内容
+   * @param position 节点索引
+   * @returns boolean
+   */
+  update(value: T, position: number): boolean {
+    // 越界判断
+    if (position < 0 || position >= this.size) return false
+
+    // 上面做过边界判断 此时的current 一定有值
+
+    let current = this.getNode(position) as Node<T>
+    current.item = value
+
+    return true
+  }
+
+  /**
+   * 根据内容查找索引
+   * @param value 查找索引的值
+   * @returns
+   */
+  indexOf(value: T): number {
+    let index = 0
+    let current = this.head
+    while (current) {
+      if (current.item === value) {
+        return index
+      }
+      current = current.next
+      index++
+    }
+    return -1
   }
 }
 
@@ -129,8 +179,8 @@ linkedList.append('老大')
 linkedList.append('二弟')
 linkedList.append('三弟')
 
-// console.log(linkedList.removeAt(0))
-console.log(linkedList.removeAt(1))
+console.log(linkedList.remove('二弟'))
+console.log(linkedList.remove('老大'))
+console.log(linkedList.remove('三弟'))
 linkedList.traverse()
-
 export {}
