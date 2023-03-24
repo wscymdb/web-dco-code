@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <input type="file" name="文件" id="file" />
+    <button id="btn">upload file</button>
+  </body>
+
+  <script>
+    const fileEl = document.querySelector('#file')
+    const btnEl = document.querySelector('#btn')
+
+    btnEl.onclick = (e) => {
+      const formData = new FormData()
+      formData.set('img', fileEl.files[0])
+
+      //发送请求
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8080/',
+        data: formData,
+        Headers: {
+          'Content-Type': 'mutilpart/form-data',
+        },
+      }).then((res) => {
+        console.log(res)
+      })
+    }
+  </script>
+</html>
