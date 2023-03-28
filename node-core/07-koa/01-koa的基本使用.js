@@ -1,7 +1,6 @@
 const Koa = require('koa')
 
 // 创建app对象
-
 const app = new Koa()
 
 // 注册中间件
