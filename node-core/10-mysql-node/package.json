@@ -1,0 +1,17 @@
+{
+  "name": "10-mysql-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-查询语句-准备数据.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "github:koajs/router",
+    "koa": "^2.14.1",
+    "mysql2": "^3.2.0"
+  }
+}
