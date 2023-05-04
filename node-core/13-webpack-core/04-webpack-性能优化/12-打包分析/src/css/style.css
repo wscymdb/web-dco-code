@@ -1,0 +1,13 @@
+body {
+  background-color: #faa;
+}
+.btn {
+  color: red;
+}
+.title {
+  background-color: #aff;
+  color: #faa;
+}
+html {
+  font-size: 100px;
+}

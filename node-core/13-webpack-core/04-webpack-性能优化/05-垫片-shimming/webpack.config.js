@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const { ProvidePlugin } = require('webpack')
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -16,6 +17,7 @@ module.exports = {
     chunkFilename: '[name]-chunk.js',
     clean: true,
   },
+
   module: {
     rules: [
       {
@@ -48,6 +50,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
     }),
+    new ProvidePlugin({
+      day: 'dayjs',
+    }),
   ],
   // 优化配置
   optimization: {
@@ -69,9 +74,6 @@ module.exports = {
         },
       },
     },
-    runtimeChunk: 'multiple',
-    // minimize: true, // 告知 webpack 使用 TerserPlugin 或其它在 optimization.minimizer定义的插件压缩 bundle。 development默认值是false production默认值是true
-    // minimizer:允许你通过提供一个或多个定制过的 TerserPlugin 实例，覆盖默认压缩工具(minimizer)。
     minimizer: [
       new TerserPlugin({
         extractComments: false, //打包的时候不提去注释文件

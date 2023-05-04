@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   mode: 'development',
@@ -28,6 +28,13 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /.css$/,
+        // 开发中我们是用style-loader  他的作用是将编写的样式放在header的style中，便于我们调试
+        // use: ['style-loader', 'css-loader'],
+        // 生产环境中我们使用MiniCssExtractPlugin.loader  这个插件将css单独提取到一个文件中了，然后这个插件的loader将这个文件以<link ref=...>的方式引入到index.html中
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
     ],
   },
   devServer: {
@@ -49,10 +56,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
     }),
+    // 对css的提取  记得在rules中使用MiniCssExtractPlugin.loader代替style-loader
+    new MiniCssExtractPlugin({
+      filename: 'css/[name]-css.css', // 提取的文件的名称
+      chunkFilename: 'css/[name]-chunk.css', // 动态导入的文件是单独分包的，那么如果有动态导入的css文件也会单独分包，这个就是设置分包的名字
+    }),
   ],
   // 优化配置
   optimization: {
-    // chunkIds: 'deterministic', // 设置id占位符的id 会根据mode模式自动设置
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       // // 当一个包大于指定的大小时继续拆包
@@ -70,9 +82,6 @@ module.exports = {
         },
       },
     },
-    runtimeChunk: 'multiple',
-    // minimize: true, // 告知 webpack 使用 TerserPlugin 或其它在 optimization.minimizer定义的插件压缩 bundle。 development默认值是false production默认值是true
-    // minimizer:允许你通过提供一个或多个定制过的 TerserPlugin 实例，覆盖默认压缩工具(minimizer)。
     minimizer: [
       new TerserPlugin({
         extractComments: false, //打包的时候不提去注释文件

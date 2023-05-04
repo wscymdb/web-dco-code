@@ -1,5 +1,7 @@
-import http from 'axios'
+import axios from 'axios'
 import _ from 'lodash'
+
+import './css/style.css'
 
 const message = '我是indexjs的文件'
 console.log(message)
@@ -25,6 +27,6 @@ btn2.onclick = () => {
   // 添加魔法注释 在对分包命名的时候的name就是我们的魔法注释名
   // import(/*webpackChunkName:'b-router'*/ /*webpackPreload:true*/ './router/b')
 }
-http.get('/').then((res) => {
+axios.get('/').then((res) => {
   console.log(res)
 })
