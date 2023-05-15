@@ -1,6 +1,7 @@
 */node_modules
 */**/node_modules
 */**/build
+*/**/dist
 ts-cms
 */dist
 .DS_Store 
