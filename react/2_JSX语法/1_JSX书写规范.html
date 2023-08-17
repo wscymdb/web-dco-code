@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'hello world'
+        }
+
+      }
+      // 渲染函数
+      render() {
+        const { message } = this.state
+        // 使用小括号包裹返回元素，且只能有一个根元素
+        return (
+          <div>
+            <h1>{message}</h1>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

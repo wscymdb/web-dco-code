@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+
+    // 变量/事件
+    let message = 'Hello World'
+    const btnClick = () => {
+      // 修改数据
+      message = 'Hello React'
+      // 重新渲染
+      DomRender()
+    }
+
+    // 初次渲染
+    DomRender()
+
+    // 封装函数
+    function DomRender() {
+      root.render((
+        <div>
+          <h2>{message}</h2>
+          <button onClick={btnClick}>修改文本</button>
+        </div>
+      ))
+    }
+  </script>
+</body>
+
+</html>

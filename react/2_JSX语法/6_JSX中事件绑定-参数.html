@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // 问题一：为什么不传递参数 event是第一个参数，传递参数event是最后一个参数
+    // 下面案列 我们给a函数永久绑定了this 且传递了参数，等到我们调用b的时候也会给他传递一个参数，所以b调用时候传递的参数会在最后
+    // 我们在绑定事件的时候传入了自定义的属性 this.btn3.bind(this, 'zs', 18) 当触发事件调用函数的时候 react会调用函数且传入event 因为绑定this的时候我们手动传入了两个参数 所以event就会在最后
+    // 当我们在绑定事件的时候没有传递属性，当触发事件调用函数的时候 react会调用函数 传入event，所以event在第一个
+    // function a() { }
+    // const b = a.bind(this, 'a', 'b')
+    // b('event')
+
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'hello world'
+        }
+
+      }
+      btn1(e) {
+        console.log(e)
+      }
+      btn2(e) {
+        console.log(e)
+      }
+
+      btn3(name, age, e) {
+        console.log(e, name, age)
+      }
+      btn4(e, name, age) {
+        console.log(e, name, age)
+      }
+      // 渲染函数
+      render() {
+        const { message } = this.state
+        return (
+          <div>
+            {/*1.传递event参数
+              如果使用的是方式一和方式二的事件绑定 react会将event进行二次封装然后传递给函数的第一个参数
+              如果使用方式三的事件绑定， 因为调用了箭头函数 所以event会在箭头函数的第一个参数中 我们只需要手动传入即可获取到event
+            */}
+            <button onClick={this.btn1.bind(this)}>按钮1</button>
+            <button onClick={(e) => this.btn2(e)} >按钮2</button>
+
+            {/*2.传递自定义参数 不推荐使用bind的形式传参会有问题一的问题  推荐使用箭头函数的绑定事件和传参方式，这样我们可以明确的控制event的位置*/}
+            <button onClick={this.btn3.bind(this, 'zs', 18)}>按钮3</button>
+            <button onClick={(e) => this.btn4(e, 'zs', 19)}>按钮4</button>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

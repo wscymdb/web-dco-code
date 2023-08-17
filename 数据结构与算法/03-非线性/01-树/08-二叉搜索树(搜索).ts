@@ -1,0 +1,95 @@
+import { btPrint } from 'hy-algokit'
+
+class TreeNode<T> {
+  left: TreeNode<T> | null = null
+  right: TreeNode<T> | null = null
+  value: T
+  constructor(value: T) {
+    this.value = value
+  }
+}
+// binary search tree
+class BSTree<T> {
+  private root: TreeNode<T> | null = null
+
+  /**
+   * 插入
+   */
+
+  insert(node: T) {
+    const newNode = new TreeNode(node)
+    // 1.判断根节点是否为空
+    if (!this.root) {
+      this.root = newNode
+    } else {
+      this.insertNode(this.root, newNode)
+    }
+  }
+  /**
+   * 插入节点--私有方法，
+   * 改方法使用的是递归
+   * 根据bst树的特点我们可以做以下的操作
+   * 首先用插入的节点和当前节点做比较，如果新节点小于当前节点的值，那么新节点放到当前树的左侧，反之放到树的右侧
+   * 如果新节点的值小于当前节点的值，在树的左侧做如下判断，如果当前节点的left是空，那么，新值插入到该位置，如果不为空那么继续用当前节点的left节点和新节点做比较，如此往复，直到找到合适位置
+   * 如果新节点的值大于当前节点的值，在树的右侧侧做如下判断，如果当前节点的right是空，那么，新值插入到该位置，如果不为空那么继续用当前节点的right节点和新节点做比较，如此往复，直到找到合适位置
+   * @param node
+   * @param newNode
+   */
+  private insertNode(node: TreeNode<T>, newNode: TreeNode<T>) {
+    if (newNode.value < node.value) {
+      if (!node.left) {
+        node.left = newNode
+      } else {
+        this.insertNode(node.left, newNode)
+      }
+    } else {
+      if (!node.right) {
+        node.right = newNode
+      } else {
+        this.insertNode(node.right, newNode)
+      }
+    }
+  }
+
+  print() {
+    btPrint(this.root)
+  }
+
+  /**
+   * 搜索， 如果值存在树中返回 true 反之返回false
+   *
+   * 核心思路：
+   * 如果找到 返回true
+   * 如果查找的值小于当前节点，那么就到树的左侧找
+   * 如果查找的值大于当前节点，那么就到树的右侧找
+   */
+  search(value: T): boolean {
+    let current = this.root
+
+    while (current) {
+      if (current.value === value) return true
+
+      if (current.value > value) {
+        current = current.left
+      } else {
+        current = current.right
+      }
+    }
+    return false
+  }
+}
+
+const bst = new BSTree<number>()
+
+const arr = [11, 7, 15, 5, 3, 9, 8, 10, 13, 12, 14, 20, 18, 25, 6]
+arr.forEach((item) => {
+  bst.insert(item)
+})
+
+bst.print()
+
+console.log(bst.search(11))
+console.log(bst.search(12))
+console.log(bst.search(111))
+
+export {}

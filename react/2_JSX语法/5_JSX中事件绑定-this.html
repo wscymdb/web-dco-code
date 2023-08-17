@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      // es6的类中推出了 class fields 
+      // 直接在类中声明一个变量 这个变量会作为类的实例字段
+      a = '123'
+      constructor() {
+        super()
+        this.state = {
+          message: 'hello world'
+        }
+
+      }
+      handleClick1() {
+        console.log('btn1', this)
+      }
+      // 使用class fields绑定this
+      handleClick2 = () => {
+        console.log('btn2', this)
+      }
+
+      // 
+      handleClick3() {
+        console.log('btn3', this)
+      }
+      // 渲染函数
+      render() {
+        const { message } = this.state
+        return (
+          <div>
+            {/*1. this绑定方式一：bind绑定*/}
+            <button onClick={this.handleClick1.bind(this)}>按钮1</button>
+            {/*2. this绑定方式二：ES6 class fields
+              因为this.handleClick2是一个箭头函数，不存在this 当调用的时候会去上层作用域找
+              (函数的作用域与定义位置有关和调用位置无关)
+              于是就找到了App这个类 但是这个类已经被实例化了 所以this就是当前的实例
+            */}
+            <button onClick={this.handleClick2}>按钮2</button>
+
+            {/*3. this绑定方式三：直接传入一个箭头函数
+              点击按钮会调用箭头函数，进而执行this.handleClick3() 因为箭头函数没有this 
+              去上层作用域找，this就是render函数的this
+              调用handleClick3  此时handleClick3的this就是render函数的this 也就是当前的实例
+            */}
+            <button onClick={() => this.handleClick3()}>按钮3</button>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+
+
+</body>
+
+</html>

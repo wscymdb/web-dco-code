@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'hello world',
+          isShow: true
+        }
+
+      }
+      btnClick() {
+        this.setState({
+          isShow: !this.state.isShow
+        })
+      }
+      // 渲染函数
+      render() {
+        const { message, isShow } = this.state
+        const objStyle = !isShow ? { display: "none" } : null
+
+        return (
+          <div>
+            <button onClick={() => this.btnClick()}>切换状态</button>
+            {isShow ? <h1>{message}</h1> : ''}
+            {<h1 style={objStyle}>实现v-show的效果</h1>}
+
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

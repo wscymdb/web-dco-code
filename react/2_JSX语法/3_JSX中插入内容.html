@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          count: 100,
+          message: 'hello world',
+          list: ['hh', 'xx', 'nn'],
+          a: undefined,
+          b: null,
+          c: true,
+          info: {
+            name: 'zs'
+          },
+          age: 18,
+        }
+
+      }
+      transformList() {
+        return this.state.list.join('---')
+      }
+      // 渲染函数
+      render() {
+        const { message, list, count, a, b, c, info, age } = this.state
+        return (
+          <div>
+            {/*1. Number/Sting/Array类型的数据会直接显示出来  Array中的数据会被切割 效果类似arr.join('') */}
+            <h1>{message}</h1>
+            <h1>{count}</h1>
+            <h1>{list}</h1>
+            {/*2. undefined/null/Boolean类型的值会被忽略，也就是页面上不显示  如果想显示，需要将值转为字符串*/}
+            <h1>{a + ''}</h1>
+            <h1>{b}</h1>
+            <h1>{c}</h1>
+            {/*3.Object类型不能作为字元素进行显示，会报错  可以展示对象的内容*/}
+            <h1>{info.name}</h1>
+            {/*4.可以插入对应的表达式*/}
+            <h1>{1 + 2 * 9}</h1>
+            {/*5.可以插入三元运算符*/}
+            <h1>{age >= 18 ? '成年' : '未成年'}</h1>
+            {/*6.可以调用方法，获取结果*/}
+            <h1>{this.transformList()}</h1>
+            <h1>{this.state.list.join('---')}</h1>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

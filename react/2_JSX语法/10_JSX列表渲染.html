@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          books: [
+            { title: '我与地坛', price: 39.29 },
+            { title: '朝花夕拾', price: 29.29 },
+            { title: '边城', price: 32.19 },
+          ]
+        }
+
+      }
+      // 渲染函数
+      render() {
+        const { books } = this.state
+        const filterBooks = books.filter(item => item.price > 30)
+        return (
+          <div>
+            <h1>书籍列表</h1>
+            <ul>
+              {books.map(item => <li key={item.title}>{item.title}---{item.price}</li>)}
+            </ul>
+            <h1>便宜书籍列表</h1>
+            <ul>
+              {filterBooks.map(item => <li key={item.title}>{item.title}---{item.price}</li>)}
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

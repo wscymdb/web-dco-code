@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+  <script src="./data.js"></script>
+  <script src="./formatPrice.js"></script>
+  <style>
+    table,
+    td,
+    th {
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 5px 8px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* .disabled {
+      
+    } */
+  </style>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          books: books
+        }
+
+      }
+
+      handleRemove(id) {
+        const { books } = this.state
+        const filterBook = books.filter(item => item.id !== id)
+        this.setState({
+          books: filterBook
+        })
+        console.log(id)
+      }
+
+      changeCount(id, val) {
+        const { books } = this.state
+
+        const resBook = books.map(item => {
+          if (item.id === id) item.count += val
+          return item
+        })
+        this.setState({
+          books: resBook
+        })
+      }
+      // 渲染函数
+      render() {
+        const { books } = this.state
+        return (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>书籍名称</th>
+                  <th>出版日期</th>
+                  <th>价格</th>
+                  <th>购买数量</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  books.map((item, i) => (
+                    <tr key={item.id}>
+                      <td>{item.name}</td>
+                      <td>{item.date}</td>
+                      <td>{formatPrice(item.price)}</td>
+                      <td>
+                        <button disabled={item.count <= 1} onClick={() => this.changeCount(item.id, -1)}>-</button>
+                        &nbsp;{item.count}&nbsp;
+                        <button onClick={() => this.changeCount(item.id, 1)}>+</button>
+                      </td>
+                      <td><button onClick={() => this.handleRemove(item.id)}>移除</button></td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+
+
+            </table>
+            <div>
+              <h1>总价格：{formatPrice(books.reduce((acc, curr) => acc + curr.price * curr.count, 0))}</h1>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

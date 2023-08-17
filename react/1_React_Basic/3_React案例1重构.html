@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // 案例一
+    // const a = new App()
+    // const bar = a.handleClick
+    // bar()
+
+
+    // react 组件有两种  类组件和函数组件
+    // 使用组件进行重构
+    class App extends React.Component {
+      // 数据
+      constructor() {
+        super() //继承所以要这个方法
+
+        this.state = {
+          message: '你好,张三'
+        }
+
+        // 使用这种方式提前给方法绑定this
+        // 那么在调用的时候就可以不用在绑定this了
+        // this.handleClick = this.handleClick.bind(this) 
+      }
+
+      // 方法 组件的方法就是类的实例方法
+      handleClick() {
+
+        this.setState({
+          message: '你好，李四'
+        })
+      }
+      // 内容 实现一个render函数(固定的方法)
+      // 使用babel对代码进行转换的时候 会将handleClick赋值给onClick 其实就是相当于上面的案例一那样，因为并没有给handleClick进行显示赋值，所以调用的时候 this就是undefined，所以要显示的绑定this，绑定的this是render中的this，也就是这个组件实例
+      render() {
+        return (
+          <div>
+            <h2>{this.state.message}</h2>
+            <button onClick={this.handleClick.bind(this)} >修改文本</button>
+            {/*
+            如果将方法提前绑定了this，这里就不用绑定this了
+            <button onClick={this.handleClick} >修改文本</button>
+            */}
+
+          </div>
+        )
+      }
+
+    }
+
+
+    // 将组件渲染到界面上
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>

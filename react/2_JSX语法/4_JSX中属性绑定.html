@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="../lib/babel.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          title: '哈哈哈',
+          imgUrl: 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/34fae6cd7b899e5121a2bee044a7d933c8950d11.jpg',
+          isActive: true,
+          styleObj: { color: "red", fontSize: "30px" }
+        }
+
+      }
+      // 渲染函数
+      render() {
+        const { title, imgUrl, isActive, styleObj } = this.state
+
+        //  class绑定写法一：字符串拼接
+        const className = `aaa bbb ${isActive ? 'active' : ''}`
+        //  class绑定写法二：将所有的class放到数组中
+        const classList = ['aa', 'bb']
+        if (isActive) classList.push('active')
+        // class绑定写法三：使用classnames库 后续脚手架的时候补充
+        return (
+          <div>
+            {/*1.基本绑定 */}
+            <h1 title={title}>我是H2元素</h1>
+            {/* <img src={imgUrl} />*/}
+
+            {/*2.class的绑定， 最好使用className 因为class是js的关键字 有时候babel可能转换错误 */}
+            <h1 className={className}>哈哈的</h1>
+            <h1 className={classList.join(" ")}>黑黑的</h1>
+
+            {/*3.style的绑定的动态绑定  属性中可以存放对象，但是内容不能*/}
+            <h1 style={styleObj}>哈哈</h1>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>
