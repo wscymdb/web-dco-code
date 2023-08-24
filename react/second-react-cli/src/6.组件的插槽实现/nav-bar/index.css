@@ -1,0 +1,24 @@
+h1,h2,body,html {
+  margin: 0;
+  padding: 0;
+}
+.bar {
+  display: flex;
+  height: 40px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 40px;
+}
+
+.left {
+  width: 20%;
+  background-color: #f00;
+}
+.center {
+  flex: 1;
+  background-color: #aff;
+}
+.right {
+  width: 20%;
+  background-color: #faf;
+}

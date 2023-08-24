@@ -1,0 +1,18 @@
+.r-enter {
+  transform: translateX(100px);
+  opacity: 0;
+}
+.r-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.r-exit {
+  opacity: 1;
+}
+.r-exit-active {
+  transform: translateX(-100px);
+  opacity: 0;
+  transition: all 1s ease;
+}

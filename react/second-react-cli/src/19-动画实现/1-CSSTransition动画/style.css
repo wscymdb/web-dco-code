@@ -1,0 +1,27 @@
+/* 首次渲染时的动画 */
+.r-appear {
+  transform: translateX(-550px);
+}
+.r-appear-active {
+  transform: translate(0px);
+  transition: all 1s linear;
+}
+
+/* 进入动画 */
+.r-enter {
+  opacity: 0;
+}
+
+.r-enter-active {
+  opacity: 1;
+  transition: all 1s linear;
+}
+
+/* 离开动画 */
+.r-exit {
+  opacity: 1;
+}
+.r-exit-active {
+  opacity: 0;
+  transition: all 1s linear;
+}
